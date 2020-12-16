@@ -1,4 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
+#!/usr/bin/env Rscript
  
 library(docopt)
 "Usage: boxplot.r  -i <file> --pdf <file> [--Rlib <dir> --width <int> --y_name <string> ]
@@ -16,7 +16,7 @@ y_name                   <- opts$y_name
 width                    <- opts$width
 Rlib                     <- opts$Rlib
  
-.libPaths(Rlib)
+#.libPaths(Rlib)
 
 # 加载R包
 library(ggpubr, quietly = TRUE)

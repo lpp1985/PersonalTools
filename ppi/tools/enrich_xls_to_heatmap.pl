@@ -7,7 +7,7 @@ my @pathways = ();
 my @genes    = ();
 my %meta     = ();
 
-open EOX, $enrich_xls or die "Can't oepn $enrich_xls!\n";
+open EOX, $enrich_xls or die "Can't open $enrich_xls!\n";
 while (<EOX>) {
 	chomp;
 	next if /^ID/;

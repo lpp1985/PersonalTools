@@ -1,4 +1,4 @@
-# 导入 -> 系统 package
+#!/usr/bin/env perl
 use strict;
 use warnings;
 use File::Spec;
@@ -10,8 +10,8 @@ use constant SCRIPTDIR => (File::Spec->splitpath(File::Spec->rel2abs($0)))[1];
 use constant PWD => $ENV{"PWD"};
 
 # 定义 -> 核心变量
-my $sra_prefetch   = "/home/genesky/software/sra_tools/2.10.4/bin/prefetch";
-my $sra_fastq_dump = "/home/genesky/software/sra_tools/2.10.4/bin/fastq-dump";
+my $sra_prefetch   = "prefetch";
+my $sra_fastq_dump = "fastq-dump";
 my $ascp           = "/home/xudl/.aspera/connect/bin/ascp|/home/xudl/.aspera/connect/etc/asperaweb_id_dsa.openssh";
 
 # 检测 -> 脚本输入

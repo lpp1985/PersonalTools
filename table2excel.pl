@@ -1,3 +1,4 @@
+#!/usr/bin/env perl
 # 导入 -> 系统 package
 use strict;
 use warnings;

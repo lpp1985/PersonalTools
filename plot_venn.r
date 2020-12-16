@@ -1,4 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
+#!/usr/bin/env Rscript
 library(docopt)
 "Usage: veen.r  -i <file> -o <string> [--Rlib <dir>]
 Options:

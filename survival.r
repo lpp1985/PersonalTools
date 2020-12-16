@@ -1,4 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
+#!/usr/bin/env  Rscript
 library(docopt)
 "Usage: survival.r  -i <file> -o <dir> [ --model <string> --Rlib <dir> --width <int> --survivalroc_time <numeric> --survivalroc_method <string> ]
 Options:

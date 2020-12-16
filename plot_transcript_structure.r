@@ -1,5 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
-
+#!/usr/bin/env Rscript
 library(docopt)
 
 "Usage: plot_transcript_structure.r  -i <file> -o <pdf file>  [--type <string>  --rlib <string>]

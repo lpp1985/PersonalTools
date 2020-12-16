@@ -1,5 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
-
+#!/usr/bin/env  Rscript
 library(docopt)
 
 "Usage: plot_volcano.r  -i <file> -o <pdf file> [--x_lab <string> --y_lab <string> --title <string> --rlib <dir> --xmin <int> --xmax <int> --ymin <int> --ymax <int>]

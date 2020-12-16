@@ -1,3 +1,4 @@
+#!/usr/bin/env Rscript
 # 检测 -> 脚本输入
 ARGS <- commandArgs(T)
 if(length(ARGS) < 3){

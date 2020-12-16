@@ -1,4 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
+#!/usr/bin/env Rscript
  
 library(docopt)
 "Usage: dotplot.r  -i <file> --pdf <file> [--xname <string> --yname <string> --Rlib <dir> --width <int> --height <int> --title <string> ]

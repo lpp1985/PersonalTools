@@ -1,5 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
-
+#!/usr/bin/env  Rscript
 library(docopt)
 
 "Usage: plot_violin.r  -i <file> -o <pdf file> [ --arrange_pic <int,int> --x_lab <string> --y_lab <string> --title <string> --rlib <dir> ]

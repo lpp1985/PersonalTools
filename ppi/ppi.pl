@@ -1,3 +1,4 @@
+#!/usr/bin/perl -w
 # 导入 -> 系统 package
 use strict;
 use warnings;
@@ -22,9 +23,9 @@ my $readme_kegg              = "$tools_dir/readme_kegg.txt";
 my $readme_go                = "$tools_dir/readme_go.txt";
 
 # 软件、环境设置
-my $Rscript         = "/home/genesky/software/r/3.5.1/bin/Rscript";
-my $Rlib            = "/home/genesky/software/r/3.5.1/lib64/R/library";
-$ENV{"R_LIBS"} = $Rlib; # R包路径
+my $Rscript         = "Rscript";
+#my $Rlib            = "/home/genesky/software/r/3.5.1/lib64/R/library";
+#$ENV{"R_LIBS"} = $Rlib; # R包路径
 # 本流程需要的R包汇总
 # library(STRINGdb)
 # library(igraph)
