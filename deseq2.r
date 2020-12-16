@@ -30,7 +30,7 @@ Rlib                     <- opts$Rlib
 
 # 部分信息提前准备
 
-if (!file.exists(output_dir)) dir.create(output_dir)
+if (!file.exists(output_dir)) dir.create(output_dir,recursive=TRUE)
 case_samples = unlist(strsplit(case_sample_list, split=','))
 control_samples = unlist(strsplit(control_sample_list, split=','))
 all_samples = c(case_samples, control_samples)  # 顺序不要变
