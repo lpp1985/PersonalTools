@@ -1,5 +1,4 @@
-#!/home/genesky/software/r/3.5.1/bin/Rscript
- 
+#!/usr/bin/env  Rscript
 library(docopt)
 "Usage: deseq2.r  -i <file> -o <dir> --case_group_name <string> --control_group_name <string> --case_sample_list <string> --control_sample_list <string> [--cor_file <file> --anno_col <string> --pvalue_cutoff <numeric> --log2fc_cutoff <numeric> --Rlib <dir>]
 Options:
@@ -30,6 +29,8 @@ Rlib                     <- opts$Rlib
 .libPaths(Rlib)
 
 # 部分信息提前准备
+
+if (!file.exists(output_dir)) dir.create(output_dir)
 case_samples = unlist(strsplit(case_sample_list, split=','))
 control_samples = unlist(strsplit(control_sample_list, split=','))
 all_samples = c(case_samples, control_samples)  # 顺序不要变
@@ -50,8 +51,11 @@ if(! is.null(anno_col) ) anno_columns = unlist(strsplit(anno_col, split=','))
 library(gplots)
 library(ggplot2)
 library(DESeq2)
-
+library("RColorBrewer")
+library('pheatmap')
 message("load reads count matrix")
+
+
 data_input <- read.table(input, header=T, sep="\t", row.names=1, comment.char="", check.names=F)
 
 # 矫正数据
@@ -120,7 +124,7 @@ cnt_norm <- as.data.frame(counts(dds, normalized=TRUE))
 cnt_norm = data.frame(ID=rownames(cnt_norm), cnt_norm, stringsAsFactors=F, check.names = F)
 
 # norm 结果输出
-norm_file <- paste0(output_dir, "/diff_norm.txt")
+norm_file <- paste0(output_dir, "/NormailizedExpression.tsv")
 write.table(cnt_norm, norm_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 # 差异分析结果提取
@@ -130,18 +134,35 @@ cnt_norm$baseMeanB <- apply( cnt_norm[, control_samples], 1, mean )
 
 # (2) 差异结果提取、标记Up/Down/Not DEG
 res <- as.data.frame(results(dds)) # baseMean log2FoldChange  lfcSE   stat    pvalue  padj 
-res$type <- "Not DEG"
-res$type[res$pvalue < pvalue_cutoff & res$log2FoldChange >= log2fc_cutoff ]   <- "Up"
-res$type[res$pvalue < pvalue_cutoff & res$log2FoldChange <= -(log2fc_cutoff)] <- "Down"
-res$type <- factor(res$type, levels = c("Up", "Down", "Not DEG"))
+res$Status <- "Not DEG"
+res$Status[res$pvalue < pvalue_cutoff & res$log2FoldChange >= log2fc_cutoff ]   <- "Up"
+res$Status[res$pvalue < pvalue_cutoff & res$log2FoldChange <= -(log2fc_cutoff)] <- "Down"
+res$Status <- factor(res$Status, levels = c("Up", "Down", "Not DEG"))
 res = cbind(cnt_norm[rownames(res), ], res)
+colnames(res)[1] = 'Name'  
 # 补充注释信息
 if(length(anno_columns) > 0) res = cbind(res, data_input[res$ID, anno_columns, drop=FALSE] )
 
 # (3) 结果输出
-diff_file <- paste0(output_dir, "/diff.txt")
+diff_file <- paste0(output_dir, "/all_result.txt")
 write.table(res, diff_file, sep="\t", quote=F, col.names = T, row.names = F)
 
+resOrdered <- res[order(res$padj),]
+resSig <- subset(resOrdered, padj < 0.05)
+
+all_file <-paste0(output_dir, "/AllDifferentialGene.tsv")
+write.table(resSig, all_file, sep="\t", quote=F, col.names = T, row.names = F)
+
+
+Up_file <-paste0(output_dir, "/Up.tsv")
+resSigUp<-subset(resSig, log2FoldChange>0)
+write.table(resSigUp, Up_file, sep="\t", quote=F, col.names = T, row.names = F)
+
+
+
+Down_file<-paste0(output_dir, "/Down.tsv")
+resSigDown <- subset(resSig, log2FoldChange<0)
+write.table(resSigDown, Down_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 # 绘图 correlation plot
 message("correlation plot")
@@ -160,7 +181,7 @@ dev.off()
 message("MA plot")
 ma_file <- paste0(output_dir, "/ma.pdf")
 pdf(ma_file)
-ggplot(res, aes(x = baseMean, y = log2FoldChange , colour = type)) + 
+ggplot(res, aes(x = baseMean, y = log2FoldChange , colour = Status)) + 
   geom_point() + 
   scale_x_continuous(limits = c(0, 2e+04)) + 
   scale_y_continuous(limits = c(-20, 20)) + 
@@ -173,20 +194,20 @@ dev.off()
 message("valcano plot")
 valcano_file <- paste0(output_dir, "/valcano.pdf")
 pdf(valcano_file)
-ggplot(res, aes(x = log2FoldChange, y = -log10(res$pvalue), color =type)) + 
+ggplot(res, aes(x = log2FoldChange, y = -log10(res$pvalue), color =Status)) + 
   geom_point() +
   theme_bw() + 
   theme(plot.title = element_text(hjust = 0.5)) + 
   labs(x = bquote(paste(log[2],"(fold change)",sep="")), y = bquote(paste(-log[10],"(p value)",sep="")), title = paste("valcano(",case_group_name,"/",control_group_name,")",sep="")) +
   scale_x_continuous(limits=c(-10,10)) +
   annotate("rect", xmin = log2fc_cutoff, xmax = Inf, ymin = -log10(0.05), ymax = Inf, alpha=0, colour="black") +
-  annotate("text", x = (log2fc_cutoff+10)/2, y = Inf, label = sum(res$type=="Up"), color = "#f8766d", vjust = 2) +
-  annotate("text", x = (log2fc_cutoff-10)/2, y = Inf, label = sum(res$type=="Down"), color = "#00ba38", vjust = 2)
+  annotate("text", x = (log2fc_cutoff+10)/2, y = Inf, label = sum(res$Status=="Up"), color = "#f8766d", vjust = 2) +
+  annotate("text", x = (log2fc_cutoff-10)/2, y = Inf, label = sum(res$Status=="Down"), color = "#00ba38", vjust = 2)
 dev.off()
 
 # pvalue 排序
 res      <- res[order(res$pvalue), ]
-exp_diff <- data.matrix(res[res$type != "Not DEG", all_samples])
+exp_diff <- data.matrix(res[res$Status != "Not DEG", all_samples])
 exp_all  <- data.matrix(res[, all_samples])
 
 # 绘图 heatmap  
@@ -218,7 +239,27 @@ if(nrow(exp_diff) > 1)
       cexCol=0.8,
       srtCol=90
     )
+
+	############聚类分析，首先对表达count进行标准化处理，之后进行聚类**这一步时间较长
+	rld <- vst(dds, blind=FALSE)
+	cor<-cor(assay(rld), method='pearson', use='pairwise.complete.obs')
+	sampleDists <- as.dist(1-cor)
+	sampleDistMatrix <- as.matrix(sampleDists)
+	colnames(sampleDistMatrix) <- colnames(rld)
+	###############样本聚类图
+	colors <- colorRampPalette(colors = c("green","yellow","red")) (255)
+	summary( colData  )
+	anno_col<- colData
+	pheatmap(sampleDistMatrix,
+         clustering_distance_rows=sampleDists,
+         clustering_distance_cols=sampleDists,
+	 annotation_col  = anno_col,
+	 annotation_row  = anno_col,
+         col=colors,cellwidth = 15, cellheight = 12, fontsize = 8,filename =  paste0(output_dir, "/diff_cluster.pdf")
+	)
+
     dev.off()
+	rld <- rlog(dds, blind=FALSE)
 
     # 绘图 Top50 heatmap 
     message("heatmap top 50 plot")
@@ -264,7 +305,7 @@ write.table(sites, paste0(output_dir, "/pc_sites.diff_rna.txt"), sep="\t", quote
 pca_importance = summary(apca)$importance
 pc1_proportion <- pca_importance[2, 1]*100
 pc2_proportion <- pca_importance[2, 2]*100
-pca_importance = cbind(type=rownames(pca_importance),pca_importance)
+pca_importance = cbind(Status=rownames(pca_importance),pca_importance)
 write.table(pca_importance, paste0(output_dir, "/pc_cont.diff_rna.txt"), sep="\t", quote=F, col.names = T, row.names = F)
 
 
@@ -299,7 +340,7 @@ write.table(sites, paste0(output_dir, "/pc_sites.all_rna.txt"), sep="\t", quote=
 pca_importance = summary(apca)$importance
 pc1_proportion <- pca_importance[2, 1]*100
 pc2_proportion <- pca_importance[2, 2]*100
-pca_importance = cbind(type=rownames(pca_importance),pca_importance)
+pca_importance = cbind(Status=rownames(pca_importance),pca_importance)
 write.table(pca_importance, paste0(output_dir, "/pc_cont.all_rna.txt"), sep="\t", quote=F, col.names = T, row.names = F)
 
 
