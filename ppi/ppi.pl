@@ -36,7 +36,7 @@ my $Rscript         = "Rscript";
 # library(pheatmap)
  
 # 检测 -> 脚本输入
-my ($gene_list, $species, $output_dir, $enrichment, $keep_tmp, $if_help);
+my ($gene_list, $taxon,$species, $output_dir, $enrichment, $keep_tmp, $if_help);
 GetOptions(
     "gene_list|g=s"   => \$gene_list,
     "species|s=s"     => \$species,
