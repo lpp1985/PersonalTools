@@ -7,7 +7,7 @@ Options:
    -o, --output <pdf>              pdf output file
    --text_size <num>               sample name size, default: auto calculate" -> doc
 
-opts                     <- docopt(doc, version = 'Program : plot tree v1.0 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = 'Program : plot tree v1.0 \n          李澎鹏\n')
 tree_file                <- opts$tree_file
 group_file               <- opts$group_file
 output                   <- opts$output

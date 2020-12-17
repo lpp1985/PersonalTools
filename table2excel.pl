@@ -211,7 +211,7 @@ sub help{
     my $info = "
 Program: convert table to excel ##### 'tab' seperate table #####
 Version: 2018-12-31
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

@@ -75,7 +75,7 @@ sub help{
     my $info = "
 Program: check index count， 统计index文件每个项目的样本数量
 Version: 2019-05-05
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

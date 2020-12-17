@@ -10,7 +10,7 @@ Options:
     -p, --prefix <prefix>   输出文件前缀， 生成: (1) ROC曲线图 prefix.ROC.pdf  (2) 逻辑回归模型结果 prefix.model.txt (3) 基于逻辑回归模型对输入样本做预测 prefix.predict.txt  (4) 最佳阈值结果 prefix.best.txt
     --rlib <dir>            R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，多因素逻辑回归、ROC \n')
+opts   <- docopt(doc, version='李澎鹏，多因素逻辑回归、ROC \n')
 input         <- opts$input
 prefix        <- opts$prefix
 gene          <- opts$gene

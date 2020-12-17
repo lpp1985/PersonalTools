@@ -161,7 +161,7 @@ Program: 根据get_dir_fastq.pl软件提供的R1_files、R2_files信息，以及
          软件会先生成bash文件，作为记录与检查。
          如果确认无误，再执行合并。
 Version: 2019-12-26
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

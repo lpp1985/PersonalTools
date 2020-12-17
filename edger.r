@@ -15,7 +15,7 @@ Options:
     --cor_file <file>               协变量矫正。至少包含两列，有表头，不能有缺失值。第一列样本名，第二列及之后的列：要矫正的变量，可以是字符型、离散型数值、连续型数值。样本顺序没有限制。
     --Rlib <dir>                    R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
-opts                     <- docopt(doc, version = '对两组样本的表达量做差异分析 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = '对两组样本的表达量做差异分析 \n          李澎鹏\n')
 input                    <- opts$input
 output_dir               <- opts$output
 case_group_name          <- opts$case_group_name

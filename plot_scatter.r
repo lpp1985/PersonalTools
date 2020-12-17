@@ -12,7 +12,7 @@ Options:
    --yname <string>      图片纵坐标显示名称，默认为输入文件y轴表头
    --Rlib <dir>          R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
-opts                     <- docopt(doc, version = '点图绘制 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = '点图绘制 \n          李澎鹏\n')
 input                    <- opts$input
 output_pdf               <- opts$pdf
 width                    <- opts$width

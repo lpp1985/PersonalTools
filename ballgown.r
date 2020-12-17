@@ -12,7 +12,7 @@ Options:
                                     注意：如果没有提供control_sample_list参数，则不进行差异分析，只给出FPKM信息
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，ballgown 定量FPKM与差异分析\n')
+opts   <- docopt(doc, version='李澎鹏，ballgown 定量FPKM与差异分析\n')
 input_dir              <- opts$input_dir
 output_dir             <- opts$output_dir
 case_sample_list       <- opts$case_sample_list

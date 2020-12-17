@@ -10,7 +10,7 @@ Options:
     -p, --prefix <prefix>   输出文件前缀， 生成:  (1) 逻辑回归分类结果 prefix.condition.txt (3) 基于逻辑回归模型对输入样本做预测的详细情况 prefix.predict.txt
     --rlib <dir>            R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，逻辑回归模型应用\n')
+opts   <- docopt(doc, version='李澎鹏，逻辑回归模型应用\n')
 input         <- opts$input
 model         <- opts$model
 prefix        <- opts$prefix

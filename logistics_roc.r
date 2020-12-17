@@ -11,7 +11,7 @@ Options:
     --no_summary_result  不做所有基因汇总建模分析
     --rlib <dir>         R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，逻辑回归、ROC\n支持单因素与多因素逻辑回归\n')
+opts   <- docopt(doc, version='李澎鹏，逻辑回归、ROC\n支持单因素与多因素逻辑回归\n')
 input             <- opts$input
 output_dir        <- opts$output
 no_single_result  <- opts$no_single_result

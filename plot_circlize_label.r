@@ -14,7 +14,7 @@ Options:
     --pdf_height <numeric>          PDF高度 [default: 7]
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/4.0.2/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，圈图添加文字\n')
+opts   <- docopt(doc, version='李澎鹏，圈图添加文字\n')
 input               <- opts$input
 species             <- opts$species
 output              <- opts$output

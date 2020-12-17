@@ -9,7 +9,7 @@ Options:
     -o, --output <pdf file>         输出pdf文件路径,示例：./a.pdf
     --rlib <string>                 r包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，自己绘制kegg点状图\n')
+opts   <- docopt(doc, version='李澎鹏，自己绘制kegg点状图\n')
 input              <- opts$input
 output             <- opts$output
 rlib               <- opts$rlib

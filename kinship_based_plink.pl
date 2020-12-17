@@ -1,7 +1,7 @@
 $| = 1; my $SCRIPT_INFO = "\n"."#"x(30)."
 样本亲缘关系 分析
 Version: v1.0 2020-04-24
-Contact: 129 甘斌
+Contact: 李澎鹏
 \n"; print $SCRIPT_INFO;
 # Perl 系统包
 use warnings;

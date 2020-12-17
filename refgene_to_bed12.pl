@@ -31,7 +31,7 @@ sub help{
     my $info = "
 Program: refGene to BED12, refGene(UCSC) 转 BED12(UCSC)
 Version: 2019-08-01
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

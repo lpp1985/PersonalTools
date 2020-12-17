@@ -94,7 +94,7 @@ sub help{
     my $info = "
 Program: ATAC 数据库创建
 Version: 2020-04-14
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

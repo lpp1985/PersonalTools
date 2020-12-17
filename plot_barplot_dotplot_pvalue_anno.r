@@ -18,7 +18,7 @@ Options:
    --pvalue_mark_anno <string>          注释方案，3列构成的固定格式：组1名称,组2名称,注释列编号.注意：组名称要与group_name_list一致，否则也不会加注释
    --y_lab <string>                     设定y轴标签 [default: Methylation]" -> doc
 
-opts                     <- docopt(doc, version = 'Program : barplot plot  v2.0 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = 'Program : barplot plot  v2.0 \n          李澎鹏\n')
 input                    <- opts$input
 output_pdf               <- opts$pdf
 sample_group_file        <- opts$sample_group_file

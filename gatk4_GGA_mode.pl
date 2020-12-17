@@ -82,7 +82,7 @@ sub help{
     my $info = "
 Program: GATK4 genotype vcf， 对指定的vcf位点进行分型
 Version: 2020-03-19
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

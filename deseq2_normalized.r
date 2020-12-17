@@ -9,7 +9,7 @@ Options:
     --anno_col <string>             input列名。从input文件中挑选指定列，放到差异结果尾部。多个列用逗号分隔。
     --Rlib <dir>                    R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
-opts                 <- docopt(doc, version = '使用deseq2对reads count数据做矫正，得到矫正后的表达矩阵 \n          甘斌 129\n')
+opts                 <- docopt(doc, version = '使用deseq2对reads count数据做矫正，得到矫正后的表达矩阵 \n          李澎鹏\n')
 input                <- opts$input
 output               <- opts$output
 sample_file          <- opts$sample_file

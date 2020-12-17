@@ -1,7 +1,7 @@
 $| = 1; my $SCRIPT_INFO = "\n"."#"x(30)."
 plink to matrix
 Version: v1.0 2020-05-28
-Contact: 129 甘斌
+Contact: 李澎鹏
 \n"; print $SCRIPT_INFO;
 # Perl 系统包
 use warnings;

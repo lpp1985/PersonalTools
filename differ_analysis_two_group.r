@@ -13,7 +13,7 @@ Options:
    -k , --keep_column <column num>       输入文件中的哪几列放入结果里？即追加input中的注释内容到结果文件里，多列用逗号分隔  example: -k 1,2,3  [default: 1]
 " -> doc
 
-opts                      <- docopt(doc, version = '差异分析 ttest/utest/logistic \n          甘斌 129\n')
+opts                      <- docopt(doc, version = '差异分析 ttest/utest/logistic \n          李澎鹏\n')
 input                     <- opts$input
 output                    <- opts$output
 sample_group              <- opts$sample_group

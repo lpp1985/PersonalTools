@@ -130,7 +130,7 @@ sub help{
     my $info = "
 Program: 获取目录下，每个样本每条lane的文件信息（注：一个样本一个目录，且目录下有多条lanefastq）
 Version: 2019-08-05
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

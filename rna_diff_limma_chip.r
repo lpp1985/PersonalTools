@@ -14,7 +14,7 @@ Options:
    --pvalue_cutoff <numeric>       pvalue 阈值，仅输出小于该阈值的结果 [default: 1]
    --append_anno_col <string>      差异结果中，添加input文件中指定列的注释内容， 例如： 2,3,4   把input文件中的2,3,4数据追加到输出文件尾部。 默认，不追加 。 第一列编号是 1    " -> doc
 
-opts                   <- docopt(doc, version = 'Program : rna_diff_limma_chip v1.0 \n          甘斌 129\n')
+opts                   <- docopt(doc, version = 'Program : rna_diff_limma_chip v1.0 \n          李澎鹏\n')
 input                  <- opts$input
 case_sample_list       <- opts$case_sample
 control_sample_list    <- opts$control_sample

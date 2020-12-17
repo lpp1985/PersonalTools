@@ -193,7 +193,7 @@ sub help{
     my $info = "
 Program: bam_reads_mark， 对每一个reads生成异常标志
 Version: 2019-02-21
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

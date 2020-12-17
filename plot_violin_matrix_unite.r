@@ -15,7 +15,7 @@ Options:
     --legend_pos <string>                legend显示的位置，top, bottom, left, right, none [default: right]
    " -> doc
 
-opts                    <- docopt(doc, version = 'Program : 对一个矩阵，绘制barplot，所有特征放在一张图上。barplot  甘斌 129\n')
+opts                    <- docopt(doc, version = 'Program : 对一个矩阵，绘制barplot，所有特征放在一张图上。barplot  李澎鹏\n')
 input                   <- opts$input
 output_pdf              <- opts$pdf
 sample_group            <- opts$sample_group

@@ -10,7 +10,7 @@ Options:
     --show_gene_count <int>   展示前n个基因 [default: 50]
     --rlib <dir>              R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，肿瘤MAF绘图\n')
+opts   <- docopt(doc, version='李澎鹏，肿瘤MAF绘图\n')
 input             <- opts$input
 output            <- opts$output
 show_gene_count  <- opts$show_gene_count

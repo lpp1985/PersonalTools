@@ -64,7 +64,7 @@ sub help{
     my $info = "
 Program: parse JSON metadata of TCGA CNV GeneLevel ， 拆分TCGA CNV GeneLevel下载数据json格式的metadata文件
 Version: 2019-03-11
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

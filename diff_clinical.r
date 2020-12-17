@@ -13,7 +13,7 @@ Options:
     -o, --output_file <dir>         输出文件
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，做临床样本做两组之间的差异分析，支持：连续变量（ttest）、离散变量(卡方)、字符变量（卡方）\n')
+opts   <- docopt(doc, version='李澎鹏，做临床样本做两组之间的差异分析，支持：连续变量（ttest）、离散变量(卡方)、字符变量（卡方）\n')
 input               <- opts$input
 sample_group        <- opts$sample_group
 case_group_name     <- opts$case_group_name

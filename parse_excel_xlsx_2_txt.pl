@@ -70,7 +70,7 @@ sub help{
     my $info = "
 Program: parse excel to txt， 把excel表格转成txt文件
 Version: 2019-09-20
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

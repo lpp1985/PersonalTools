@@ -13,7 +13,7 @@ Options:
    --keep2_name <string>   数据表2中的指定列输出到结果中, 多个列名用逗号分隔， 默认仅保留特征名称。强烈建议第一个表头是特征名称
    --method <string>       分析方法，仅支持 pearson/spearman [default: pearson]" -> doc
 
-opts                <- docopt(doc, version = 'Program : correlation_two_data_set v1.0 \n          甘斌 129\n')
+opts                <- docopt(doc, version = 'Program : correlation_two_data_set v1.0 \n          李澎鹏\n')
 data1_file          <- opts$data1
 data2_file          <- opts$data2
 compare_file        <- opts$compare

@@ -111,7 +111,7 @@ sub help{
     my $info = "
 Program: 从gtf文件提取UTR3序列
 Version: 2020-03-27
-Contact: 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

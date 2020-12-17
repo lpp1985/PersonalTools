@@ -10,7 +10,7 @@ Options:
    --alpha <float>             填充颜色透明度 0-1取值，0完全透明，1不透明。 [default: 1]
    --output <html>             html输出文件， 示例： ./pca.html" -> doc
 
-opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          李澎鹏\n')
 pca_file                 <- opts$pca_file
 group_file               <- opts$group_file
 output                   <- opts$output

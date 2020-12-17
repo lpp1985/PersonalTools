@@ -12,7 +12,7 @@ Options:
    --output_prefix <file>          输出文件的前缀，例如： ./result  。 最终生成的结果为 result.diff.xls。
    --pvalue_cutoff <numeric>       pvalue 阈值，仅输出小于该阈值的结果 [default: 1]" -> doc
 
-opts                   <- docopt(doc, version = 'Program : geo_mrna_chip_diff v1.0 \n          甘斌 129\n')
+opts                   <- docopt(doc, version = 'Program : geo_mrna_chip_diff v1.0 \n          李澎鹏\n')
 series_number          <- opts$series_number
 case_sample_list       <- opts$case_sample
 control_sample_list    <- opts$control_sample

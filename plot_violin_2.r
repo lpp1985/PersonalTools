@@ -13,7 +13,7 @@ Options:
     --title <string>          标题    [default: Sample SNV frequency violin plot]
     --rlib <dir>              R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，小提琴图\n')
+opts   <- docopt(doc, version='李澎鹏，小提琴图\n')
 input             <- opts$input
 output            <- opts$output
 arrange_pic       <- opts$arrange_pic

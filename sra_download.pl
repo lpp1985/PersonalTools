@@ -80,7 +80,7 @@ sub help{
     my $info = "
 Program: sra download， 根据sra编号下载数据
 Version: 2019-05-16
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

@@ -71,7 +71,7 @@ sub help{
     my $info = "
 Program: GATK4 GVCF， 人源， GVCF分析
 Version: 2019-01-30
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

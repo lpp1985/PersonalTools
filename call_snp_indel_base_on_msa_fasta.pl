@@ -1,7 +1,7 @@
 $| = 1; my $SCRIPT_INFO = "\n"."#"x(30)."
 基于多重序列比对MSA文件，识别SNP/INDEL
 Version: v1.0 2020-09-25
-Contact: 129 甘斌
+Contact: 李澎鹏
 \n"; print $SCRIPT_INFO;
 # Perl 系统包
 use warnings;

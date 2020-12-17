@@ -26,7 +26,7 @@ if(length(ARGS) < 3){
     cat("
 Program: Decision Curve Analysis，DCA
 Version: v1.0
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   Rscript", SCRIPT, "OUTDIR PREFIX INPUTFile1 INPUTFile2 ...
 

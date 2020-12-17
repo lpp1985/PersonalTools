@@ -27,7 +27,7 @@ Options:
     --reverse_sample_anno           反转样本注释信息顺序。默认 sample_group 最后一列注释内容显示在最上方，但是有时候不是很好看，可以通过这个参数给它反过来。
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，热图\n')
+opts   <- docopt(doc, version='李澎鹏，热图\n')
 input              <- opts$input
 output             <- opts$output
 sample_group       <- opts$sample_group

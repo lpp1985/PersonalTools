@@ -16,7 +16,7 @@ Options:
     --pdf_height <int>        pdf高度 [default: 10]
     --rlib <dir>              R包路径 [default: /home/genesky/software/r/4.0.2/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，肿瘤MAF绘图\n')
+opts   <- docopt(doc, version='李澎鹏，肿瘤MAF绘图\n')
 input             <- opts$input
 output            <- opts$output
 draw_titv         <- opts$draw_titv

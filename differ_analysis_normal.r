@@ -12,7 +12,7 @@ Options:
    --case_group_sample_file <file>       case组样本列表文件，一列数据，没有表头，第一列就是样本名，一行一个样本
    --control_group_sample_file <file>    control组样本列表文件，一列数据，没有表头，第一列就是样本名，一行一个样本" -> doc
 
-opts                      <- docopt(doc, version = 'Program : methylation diff analysis Ttest/Utest/Logistic v1.1 \n          甘斌 129\n')
+opts                      <- docopt(doc, version = 'Program : methylation diff analysis Ttest/Utest/Logistic v1.1 \n          李澎鹏\n')
 input                     <- opts$input
 case_group_name           <- opts$case_group_name
 control_group_name        <- opts$control_group_name

@@ -11,7 +11,7 @@ Options:
     -o, --output <pdf>              输出pdf文件 
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，lasso分析\n')
+opts   <- docopt(doc, version='李澎鹏，lasso分析\n')
 input               <- opts$input
 lasso_coef          <- opts$lasso_coef
 exp                 <- opts$exp

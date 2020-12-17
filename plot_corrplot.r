@@ -20,7 +20,7 @@ Options:
     --title <string>                标题    [default: NA]
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，相关性图\n')
+opts   <- docopt(doc, version='李澎鹏，相关性图\n')
 input              <- opts$input
 output             <- opts$output
 cor_direction      <- opts$cor_direction

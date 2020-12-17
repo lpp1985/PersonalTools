@@ -242,7 +242,7 @@ sub help{
     my $info = "
 Program: 基于miRNA序列和UTR3序列，预测靶向关系
 Version: 2020-03-27
-Contact: 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

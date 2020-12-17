@@ -25,7 +25,7 @@ Options:
                                     该文件可以不提供                   
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，lasso分析， 基于生存信息\n')
+opts   <- docopt(doc, version='李澎鹏，lasso分析， 基于生存信息\n')
 surv                <- opts$surv
 exp                 <- opts$exp
 output_dir          <- opts$output_dir

@@ -8,7 +8,7 @@ Options:
    --group_file <file>          样本分组文件，两列，没有表头。第一列样本名，第二列样本分组
    --output_prefix <file>       输出结果的文件前缀" -> doc
 
-opts                <- docopt(doc, version = 'Program : deseq2_diff_anova.R v1.0 \n          甘斌 129\n')
+opts                <- docopt(doc, version = 'Program : deseq2_diff_anova.R v1.0 \n          李澎鹏\n')
 expression          <- opts$expression
 group_file          <- opts$group_file
 output_prefix       <- opts$output_prefix
@@ -60,7 +60,7 @@ pair_result_names = unlist(lapply(combine_pair, function(x){ paste(x, c('diff', 
 col_names = c(col_names, pair_result_names);
 colnames(result) = col_names
 
-######### 甘斌
+######### 李澎鹏
 message("start anova analysis")
 for(row in 1:nrow(DataForDEA))
 {   

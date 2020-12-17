@@ -11,7 +11,7 @@ Options:
    --cex <float>               图像中，所有形状、文字大小 （--symbolsize 1.5 --cex 0.5 效果 = 缩小文字）[default: 1]
    --output_prefix <pdf>       pdf输出文件前缀， 示例： ./pedigree " -> doc
 
-opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          李澎鹏\n')
 ped_file                 <- opts$ped_file
 output_prefix            <- opts$output_prefix
 pdf_width                <- as.numeric(opts$pdf_width)

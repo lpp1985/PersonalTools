@@ -15,7 +15,7 @@ Options:
     --pdf_height <numeric>   pdf图高度 [default: 7]
     --method <string>        分析方法，仅支持 pearson/spearman [default: spearman]" -> doc
 
-opts                <- docopt(doc, version = 'Program : correlation_two_data_set v1.0 \n          甘斌 129\n')
+opts                <- docopt(doc, version = 'Program : correlation_two_data_set v1.0 \n          李澎鹏\n')
 data1_file          <- opts$data1
 data2_file          <- opts$data2
 sample_file         <- opts$sample_file

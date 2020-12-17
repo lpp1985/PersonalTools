@@ -152,7 +152,7 @@ sub help{
     my $info = "
 Program: 合并tcga下载的fpkm文件
 Version: 2020-08-05
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

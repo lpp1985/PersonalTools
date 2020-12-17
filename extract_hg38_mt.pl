@@ -98,7 +98,7 @@ sub help{
     my $info = "
 Program: 从bam文件里提取MT的比对结果，生成只包含MT信息的bam文件。
 Version: 2019-12-26
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

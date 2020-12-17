@@ -121,7 +121,7 @@ sub help{
     my $info = "
 Program: circos 直方图绘制
 Version: 2019-11-27
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

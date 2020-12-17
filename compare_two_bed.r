@@ -14,7 +14,7 @@ Options:
     --pdf_width <int>      pdf宽度 [default: 14]
     --rlib <dir>           R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，比较两个bed文件，计算是否是随机的两个区域。p值越显著，关联性越大\n')
+opts   <- docopt(doc, version='李澎鹏，比较两个bed文件，计算是否是随机的两个区域。p值越显著，关联性越大\n')
 bed1            <- opts$bed1
 bed2            <- opts$bed2
 genome          <- opts$genome

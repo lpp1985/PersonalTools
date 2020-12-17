@@ -11,7 +11,7 @@ Options:
     -o, --output <prefix>           输出文件前缀,示例：./a.pdf
     --rlib <string>                 r包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，PSM分析，挑选合适的配对样本集，减少其他环境因素的影响，再说的白话一点，就是挑选样本，使当前case/control条件下，其他的临床数据不要有差异\n')
+opts   <- docopt(doc, version='李澎鹏，PSM分析，挑选合适的配对样本集，减少其他环境因素的影响，再说的白话一点，就是挑选样本，使当前case/control条件下，其他的临床数据不要有差异\n')
 input              <- opts$input
 output             <- opts$output
 rlib               <- opts$rlib

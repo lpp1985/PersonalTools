@@ -9,7 +9,7 @@ Options:
     -t, --type <string>             输入数据类型，基因/转录本，g/t [default:g]
     --rlib <string>                 r包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，绘制转录本或基因在基因组上的区域结构图\n')
+opts   <- docopt(doc, version='李澎鹏，绘制转录本或基因在基因组上的区域结构图\n')
 input              <- opts$input
 output             <- opts$output
 type             <- opts$type

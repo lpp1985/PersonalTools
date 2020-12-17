@@ -20,7 +20,7 @@ Options:
     --sort_value <string>     绘图数据排序, 默认不排序，None/Ascend/Descend [default: None]
     --rlib <dir>              R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，小提琴图\n')
+opts   <- docopt(doc, version='李澎鹏，小提琴图\n')
 input             <- opts$input
 output            <- opts$output
 plot_name         <- opts$plot_name

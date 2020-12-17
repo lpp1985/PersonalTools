@@ -151,7 +151,7 @@ sub help{
     my $info = "
 Program: get_gene_transcript_structure， 获取基因转录本的CDS区域信息
 Version: 2019-12-03
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

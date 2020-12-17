@@ -163,7 +163,7 @@ sub help{
     my $info = "
 Program: 基于细菌的基因组组装结果（可以是草图）， 制作进化树
 Version: 2020-04-02
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

@@ -41,7 +41,7 @@ sub help{
     my $info = "
 Program: abstract rrna intervars from UCSC， 从UCSC rRNA中提取rRNA区域
 Version: 2019-04-20
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

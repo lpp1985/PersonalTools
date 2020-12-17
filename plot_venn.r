@@ -42,7 +42,7 @@ mycol <- colors()[mycol]
 message("绘制")
 # VennDiagram 会产生log文件，下述代码能够抑制
 futile.logger::flog.threshold(futile.logger::ERROR, name = "VennDiagramLogger")
-# 甘斌：根据不同维度，分别进行了优化
+# 李澎鹏：根据不同维度，分别进行了优化
 # 绘制一维韦恩图
 if(class_count == 1)
 { 

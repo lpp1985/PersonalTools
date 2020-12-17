@@ -9,7 +9,7 @@ Options:
    --size <int>                点的大小 [default: 1]
    --output <pdf>              pdf output file" -> doc
 
-opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = 'Program : plot pca v1.0 \n          李澎鹏\n')
 pca_file                 <- opts$pca_file
 group_file               <- opts$group_file
 output                   <- opts$output

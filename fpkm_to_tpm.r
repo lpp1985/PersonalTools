@@ -9,7 +9,7 @@ Options:
     -o, --output <file>             输出文件
     " -> doc
 
-opts   <- docopt(doc, version='甘斌，FPKM 转 TPM\n')
+opts   <- docopt(doc, version='李澎鹏，FPKM 转 TPM\n')
 input               <- opts$input
 output              <- opts$output
  

@@ -133,7 +133,7 @@ sub help{
 Program: 基于parse_json_tcga_FPKM_metadata.pl生成的样本文件对应表，以及gdc-client下载后的结果路径
          对数据做合并处理（官方下载，一个样本对应一个文件，不方便使用）
 Version: 2020-01-07
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

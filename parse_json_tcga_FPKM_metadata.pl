@@ -65,7 +65,7 @@ sub help{
 Program: parse JSON metadata of TCGA FPKM ， 拆分TCGA FPKM下载数据json格式的metadata文件
          该文件可用于后续识别样本名，合并数据
 Version: 2019-03-11
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

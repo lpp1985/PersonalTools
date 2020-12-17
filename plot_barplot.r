@@ -15,7 +15,7 @@ Options:
     --horizontal              水平绘图
     --rlib <dir>              R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，小提琴图\n')
+opts   <- docopt(doc, version='李澎鹏，小提琴图\n')
 input             <- opts$input
 output            <- opts$output
 x_lab             <- opts$x_lab

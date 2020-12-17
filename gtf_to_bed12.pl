@@ -45,7 +45,7 @@ sub help{
     my $info = "
 Program: gtf to BED12, gtf 转 BED12(UCSC)
 Version: 2019-02-21
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

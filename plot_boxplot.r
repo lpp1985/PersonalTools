@@ -9,7 +9,7 @@ Options:
    --width <int>         pdf绘图时，每一个分组的宽度 [default: 2.5]
    --Rlib <dir>          R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
-opts                     <- docopt(doc, version = '点图绘制 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = '点图绘制 \n          李澎鹏\n')
 input                    <- opts$input
 output_pdf               <- opts$pdf
 y_name                   <- opts$y_name

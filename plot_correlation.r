@@ -4,7 +4,7 @@ if(length(ARGS) < 2){
   cat("
 Program: correlation 
 Version: v1.0
-Contact: 129 甘斌
+Contact: 李澎鹏
       
 Usage:   Rscript stringdb.r ARGS1 ARGS2 ARGS3
       

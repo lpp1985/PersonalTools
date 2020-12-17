@@ -15,7 +15,7 @@ Options:
     --pdf_height <numeric>        DCA图的PDF宽度 [default: 9]
     --rlib <dir>                  R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，DCA分析\n')
+opts   <- docopt(doc, version='李澎鹏，DCA分析\n')
 files             <- opts$files
 names             <- opts$names
 output_prefix     <- opts$output_prefix
@@ -193,7 +193,7 @@ write.table(output_data,
 #     cat("
 # Program: Decision Curve Analysis，DCA
 # Version: v1.0
-# Contact: 129 甘斌
+# Contact: 李澎鹏
 
 # Usage:   Rscript", SCRIPT, "OUTDIR PREFIX INPUTFile1 INPUTFile2 ...
 

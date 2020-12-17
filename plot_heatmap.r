@@ -26,7 +26,7 @@ Options:
     --title <string>                标题    [default: heatmap plot]
     --rlib <dir>                    R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，热图\n')
+opts   <- docopt(doc, version='李澎鹏，热图\n')
 input              <- opts$input
 output             <- opts$output
 sample_list        <- opts$sample_list

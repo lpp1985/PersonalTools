@@ -69,7 +69,7 @@ sub help{
     my $info = "
 Program: EBI-ENA fastq download， 从EBI-ENA上下载NCBI原始fastq数据
 Version: 2019-06-27
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

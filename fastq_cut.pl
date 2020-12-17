@@ -47,7 +47,7 @@ sub help{
 Program: fastq cut， 截取fastq文件前n条
          多用于文件损坏的场景
 Version: 2019-09-06
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

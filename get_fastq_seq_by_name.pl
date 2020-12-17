@@ -63,7 +63,7 @@ sub help{
     my $info = "
 Program: get seq from fastq， 从fasta文件中获取指定序列
 Version: 2019-02-26
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

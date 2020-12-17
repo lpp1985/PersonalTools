@@ -210,7 +210,7 @@ sub help{
     my $info = "
 Program: get refGene code count， 获取refGene密码子数量
 Version: 2019-01-27
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 

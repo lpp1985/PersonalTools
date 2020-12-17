@@ -13,7 +13,7 @@ Options:
     --anno_col <string>             input列名。从input文件中挑选指定列，放到差异结果尾部。多个列用逗号分隔。
     --Rlib <dir>                    R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
-opts                     <- docopt(doc, version = '对两个样本的表达量做差异分析 \n          甘斌 129\n')
+opts                     <- docopt(doc, version = '对两个样本的表达量做差异分析 \n          李澎鹏\n')
 input                    <- opts$input
 keep_house_gene          <- opts$keep_house_gene
 output_dir               <- opts$output

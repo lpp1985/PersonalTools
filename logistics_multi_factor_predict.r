@@ -11,7 +11,7 @@ Options:
     -t, --threshold <float> 分类阈值， [0-1], 通常选择多元逻辑回归模型下的best值对应的 threshold
     --rlib <dir>            R包路径 [default: /home/genesky/software/r/3.5.1/lib64/R/library]" -> doc
 
-opts   <- docopt(doc, version='甘斌，多元逻辑回归模型应用\n')
+opts   <- docopt(doc, version='李澎鹏，多元逻辑回归模型应用\n')
 input         <- opts$input
 model         <- opts$model
 threshold     <- as.numeric(opts$threshold)

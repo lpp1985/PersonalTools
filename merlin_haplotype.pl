@@ -1,7 +1,7 @@
 $| = 1; my $SCRIPT_INFO = "\n"."#"x(30)."
 基于merlin的 单倍型分析
 Version: v1.0 2020-04-26
-Contact: 129 甘斌
+Contact: 李澎鹏
 \n"; print $SCRIPT_INFO;
 # Perl 系统包
 use warnings;

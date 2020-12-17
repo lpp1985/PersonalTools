@@ -63,7 +63,7 @@ sub help{
     my $info = "
 Program: blast+ blastn， 序列比对
 Version: 2019-01-22
-Contact: 129 甘斌
+Contact: 李澎鹏
 
 Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 
