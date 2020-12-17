@@ -27,17 +27,18 @@ organ      = ARGS[2]
 outputpath = normalizePath(ARGS[3])
 
 data = read.table(inputfile, header = F, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
+if  ( dim(data)[1]>2000 ) data  <- data[1:2000,]
 colnames(data)[1] = c("gene")
 
 #获取数据库中物种的species_id
 cat("##### get species id #####\n")
-name2id    = get_STRING_species(version = "10", species_name = NULL)
-organ      = gsub("_", " ", organ)
-species_id = name2id$species_id[name2id$official_name == organ]
-
+#name2id    =  STRINGdb$new(version = "10", species_name = NULL)
+#organ      = gsub("_", " ", organ)
+#species_id = name2id$species_id[name2id$official_name == organ]
+species_id = 10090
 #加载数据库，将gene名和数据库中的蛋白标识符mapping
 cat("##### map gene symbol #####\n")
-string_db   = STRINGdb$new(version = "10", species = species_id, score_threshold = 0, input_directory = "")
+string_db   = STRINGdb$new(version = "11", species = species_id, score_threshold = 0, input_directory = "")
 data_mapped = string_db$map(data, "gene", removeUnmappedRows = TRUE)
 hits        = data_mapped$STRING_id
 

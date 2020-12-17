@@ -26,7 +26,7 @@ inputfile  = normalizePath(ARGS[1])
 organ      = ARGS[2]
 outputpath = normalizePath(ARGS[3])
 
-data = read.table(inputfile, header = F, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
+data = read.table(inputfile, header = T, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
 if  ( dim(data)[1]>2000 ) data  <- data[1:2000,]
 colnames(data)[1] = c("gene")
 
@@ -46,7 +46,13 @@ hits        = data_mapped$STRING_id
 cat("##### ppi start #####\n")
 
 pdf(paste(outputpath, "ppi_string.pdf",sep = "/"))
-string_db$plot_network(hits) # ppi分析，绘图，该步骤会从官网下载数据库，大约35MB
+
+differentgene <- string_db$add_diff_exp_color( subset(data_mapped, padj<0.05),logFcColStr="log2FoldChange" )
+payload_id <- string_db$post_payload( differentgene$STRING_id,colors=differentgene$Status )
+
+
+string_db$plot_network( hits , payload_id=payload_id ) # ppi分析，绘图，该步骤会从官网下载数据库，大约35MB
+
 dev.off()
 
 inter    = string_db$get_interactions(hits) # ppi分析，关系数据，该步骤会从官网下载数据库，大约35MB（注：如果执行了plot_network步骤，这一步则不会再下载数据库）
