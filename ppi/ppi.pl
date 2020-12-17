@@ -40,7 +40,7 @@ my ($gene_list, $taxon,$species, $output_dir, $enrichment, $keep_tmp, $if_help);
 GetOptions(
     "gene_list|g=s"   => \$gene_list,
     "species|s=s"     => \$species,
-	"taxon|t=s"		  => \$taxon,
+    "taxon|t=s"		  => \$taxon,
     "output_dir|o=s"  => \$output_dir,
     "enrichment|e!"   => \$enrichment,
     "keep_tmp|k!"     => \$keep_tmp,
@@ -56,7 +56,7 @@ $output_dir = Cwd::abs_path($output_dir);
 mkdir $output_dir if(not -e $output_dir);
 
 # （2） PPI分析
-#system("$Rscript $stringdb_script $gene_list $taxon $output_dir");
+system("$Rscript $stringdb_script $gene_list $taxon $output_dir");
 
 # （3）每个簇富集分析
 exit if(not defined $enrichment);

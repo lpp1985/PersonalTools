@@ -24,6 +24,10 @@ $color_file = "" if(not defined $color_file);
 ###################################################################### 主程序
 my %hashDiffPahtway = read_kegg_enrichment($kegg_enrichment, 0.05); # 读取富集分析结果,p值小于0.05
 my %hashColor       = read_color_file($color_file); # 读取基因上下调状态
+#print $hashColor{"ENSMUSG00000053436"}."\n";
+#my @names;
+#@names = keys %hashColor;
+#print @names;
 
 open ADD, ">$output_file";
 foreach my $pathway_id(sort keys %hashDiffPahtway)
@@ -32,8 +36,10 @@ foreach my $pathway_id(sort keys %hashDiffPahtway)
 	foreach my $gene_name(sort keys %{$hashDiffPahtway{$pathway_id}})
 	{
 		my $gene_color = 'red';
-		   $gene_color = 'red'  if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'Up');
-		   $gene_color = 'green' if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'Down');
+		   $gene_color = 'red'  if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'up');
+		   $gene_color = 'green' if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'down');
+		#print $gene_name;
+		#print $gene_color;
 		push @colors, "$gene_name%09$gene_color"; # 基因设成红色
 	}
 	my $color = join "/", @colors;
