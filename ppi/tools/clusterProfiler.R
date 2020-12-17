@@ -30,7 +30,7 @@ db       <- list(
 
 gene     <- read.table(input, stringsAsFactors=F)[[1]]
 
-eg <- bitr(gene, fromType="SYMBOL", toType="ENTREZID", OrgDb=db[[organ]])
+eg <- bitr(gene, fromType="ENSEMBL", toType="ENTREZID", OrgDb=db[[organ]])
 gene     <- eg[[2]]
 
 ego_cc <- enrichGO(gene          = gene,

@@ -9,7 +9,7 @@ Options:
     --case_sample_list <string>     case组样本列表， 样本之间用逗号分隔, 例如 a,b,c。 务必保证这些样本在input文件中存在。 注意：case + control的样本数量 要>=3。如果只有2个样本做对比，只能用老版本的deseq2或者edger的pair模式edger_two_sample_compare.r。 
     --control_sample_list <string>  control组样本列表， 样本之间用逗号分隔
     --pvalue_cutoff <numeric>       标记显著性符号时，pvalue阈值。 [default: 0.05]
-    --log2fc_cutoff <numeric>       标记显著性符号时，log2 foldchange阈值, 绝对值 [default: 1]
+    --log2fc_cutoff <numeric>       标记显著性符号时，log2 foldchange阈值, 绝对值 [default: 0]
     --anno_col <string>             input列名。从input文件中挑选指定列，放到差异结果尾部。多个列用逗号分隔。
     --cor_file <file>               协变量矫正。至少包含两列，有表头，不能有缺失值。第一列样本名，第二列及之后的列：要矫正的变量，可以是字符型、离散型数值、连续型数值。样本顺序没有限制。
     --Rlib <dir>                    R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
@@ -135,8 +135,8 @@ cnt_norm$baseMeanB <- apply( cnt_norm[, control_samples], 1, mean )
 # (2) 差异结果提取、标记Up/Down/Not DEG
 res <- as.data.frame(results(dds)) # baseMean log2FoldChange  lfcSE   stat    pvalue  padj 
 res$Status <- "Not DEG"
-res$Status[res$pvalue < pvalue_cutoff & res$log2FoldChange >= log2fc_cutoff ]   <- "Up"
-res$Status[res$pvalue < pvalue_cutoff & res$log2FoldChange <= -(log2fc_cutoff)] <- "Down"
+res$Status[res$padj < pvalue_cutoff & res$log2FoldChange >= log2fc_cutoff ]   <- "Up"
+res$Status[res$padj < pvalue_cutoff & res$log2FoldChange <= -(log2fc_cutoff)] <- "Down"
 res$Status <- factor(res$Status, levels = c("Up", "Down", "Not DEG"))
 res = cbind(cnt_norm[rownames(res), ], res)
 colnames(res)[1] = 'Name'  
@@ -148,7 +148,7 @@ diff_file <- paste0(output_dir, "/all_result.txt")
 write.table(res, diff_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 resOrdered <- res[order(res$padj),]
-resSig <- subset(resOrdered, padj < 0.05)
+resSig <- subset(resOrdered, Status != "Not DEG")
 
 all_file <-paste0(output_dir, "/AllDifferentialGene.tsv")
 write.table(resSig, all_file, sep="\t", quote=F, col.names = T, row.names = F)
