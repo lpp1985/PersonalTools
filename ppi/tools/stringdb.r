@@ -27,10 +27,10 @@ organ      = ARGS[2]
 outputpath = normalizePath(ARGS[3])
 
 data = read.table(inputfile, header = T, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
-data$Color="#FF0000FF"
-data$Color[data$log2FoldChange >= 0 ]   <- "red"
+data$Color="#00FF00FF"
+data$Color[data$log2FoldChange >= 0 ]   <- "#FF0000FF"
 if  ( dim(data)[1]>2000 ) data  <- data[1:2000,]
-colnames(data)[1] = c("#00FF00FF")
+colnames(data)[1] = c("gene")
 
 #获取数据库中物种的species_id
 cat("##### get species id #####\n")
@@ -42,7 +42,7 @@ species_id = 10090
 cat("##### map gene symbol #####\n")
 
 CONDABASE <- Sys.getenv("CONDABASE")   
-string_db   = STRINGdb$new(version = "11", species = species_id, score_threshold = 0, input_directory =  paste(CONDABASE, "db/string/",sep = "/") )
+string_db   = STRINGdb$new(version = "11", species = species_id, score_threshold = 0, input_directory =   paste(CONDABASE, "db/string/",sep = "/") )
 data_mapped = string_db$map(data, "gene", removeUnmappedRows = TRUE)
 hits        = data_mapped$STRING_id
 
