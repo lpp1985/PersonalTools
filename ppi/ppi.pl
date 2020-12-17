@@ -181,6 +181,7 @@ Usage:   perl ".(File::Spec->splitpath(File::Spec->rel2abs($0)))[2]." [options]
 Options:
 
          --gene_list/-g    [必填] gene_list文件，第一列数据是基因名，不能有表头。第二列允许字符up/down(不区分大小写)，用于在通路图中标记颜色默认为红色（up=red,down=blue）
+	 --taxon/-t	   [必填] taxonomy ID
          --species/-s      物种名称，默认为人。人=Homo_sapiens，小鼠=Mus_musculus，大鼠=Rattus_norvegicus，拟南芥=Arabidopsis_thaliana，杨树=Populus_trichocarpa，
          --output_dir/-o   [必填] 结果输出路径
          --enrichment/-e   是否对基因簇做富集分析，默认不做。支持物种人，小鼠，大鼠
