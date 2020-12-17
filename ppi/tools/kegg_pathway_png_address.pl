@@ -32,8 +32,8 @@ foreach my $pathway_id(sort keys %hashDiffPahtway)
 	foreach my $gene_name(sort keys %{$hashDiffPahtway{$pathway_id}})
 	{
 		my $gene_color = 'red';
-		   $gene_color = 'red'  if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'up');
-		   $gene_color = 'blue' if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'down');
+		   $gene_color = 'red'  if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'Up');
+		   $gene_color = 'green' if(exists $hashColor{$gene_name} and $hashColor{$gene_name} eq 'Down');
 		push @colors, "$gene_name%09$gene_color"; # 基因设成红色
 	}
 	my $color = join "/", @colors;
@@ -54,7 +54,7 @@ sub read_color_file{
 	{
 		$_=~s/[\r\n]//g;
 		my ($gene, $regular) = split /\t/, $_;
-		$regular = 'up' if(not defined $regular);
+		$regular = 'Up' if(not defined $regular);
 		$hashColor{$gene} = lc($regular);
 	}
 	close COLOR;
@@ -104,7 +104,7 @@ Options:
 
          --kegg_enrichment/-k [必填] kegg_enrichment.xls 结果文件。kegg通路富集分析原始结果
          --output_file/-o     [必填] 结果输出文件
-         --color/-c           [选填] 基因颜色文件，第一列基因，第二列up/down, (up=read, down=blue)
+         --color/-c           [选填] 基因颜色文件，第一列基因，第二列Up/Down, (up=red, down=green)
 
          --help/-h         查看帮助文档
     \n";

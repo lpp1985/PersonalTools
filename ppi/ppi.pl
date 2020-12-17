@@ -56,7 +56,7 @@ $output_dir = Cwd::abs_path($output_dir);
 mkdir $output_dir if(not -e $output_dir);
 
 # （2） PPI分析
-system("$Rscript $stringdb_script $gene_list $taxon $output_dir");
+#system("$Rscript $stringdb_script $gene_list $taxon $output_dir");
 
 # （3）每个簇富集分析
 exit if(not defined $enrichment);
@@ -102,6 +102,7 @@ foreach my $cluster_id(sort { $a<=>$b } keys %hashCluster)
     # 簇基因列表
     my $gene_list = "$cluster_tmp_dir/gene_list.txt";
     open GENELIST, ">$gene_list";
+    print  GENELIST "Name\n";
     map{ print GENELIST "$_\n" } @genes;
     close GENELIST;
 
@@ -112,7 +113,7 @@ foreach my $cluster_id(sort { $a<=>$b } keys %hashCluster)
     push @sheet_names, "cluster_$cluster_id";
 
     # 获取通路图下载地址，并上色
-    system("perl $kegg_pathway_png_address -k $cluster_tmp_dir/kegg_enrichment.xls -c $gene_list -o $cluster_tmp_dir/kegg.urls.txt");
+    system("perl $kegg_pathway_png_address -k $cluster_tmp_dir/kegg_enrichment.xls -c $gene_list.status -o $cluster_tmp_dir/kegg.urls.txt");
     system("perl $download_kegg_png -i $cluster_tmp_dir/kegg.urls.txt -o $cluster_tmp_dir/");
     
     # 结果拷贝

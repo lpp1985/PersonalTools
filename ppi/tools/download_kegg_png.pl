@@ -159,7 +159,7 @@ sub download_png
 	foreach my $x (@{$urls}) {
 		my $pid = $pm->start and next;
 		my ($name) = $x =~ /(\w+)\.png/;
-		print $x;
+		#print $x;
 		system qq{wget  -q -O $out_dir/png/$name.png "$x"};
 		print  "  $x";
 		$pm->finish;

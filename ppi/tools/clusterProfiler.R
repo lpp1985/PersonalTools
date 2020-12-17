@@ -30,15 +30,21 @@ db       <- list(
 
 gene     <- read.table(input, stringsAsFactors=F,header=T)$Name
 
+all_data <- read.table(input, stringsAsFactors=F,header=T)
+all_data <- all_data[,c("Name","Status")]
+write.table( all_data, paste0(input,".status" ),  sep="\t", quote=F, row.names=F)
 
 eg <- bitr(gene, fromType="ENSEMBL", toType="ENTREZID", OrgDb=db[[organ]])
 symbol <- bitr(gene, fromType="ENSEMBL", toType="SYMBOL", OrgDb=db[[organ]])
 all_gene <- read.table(input, stringsAsFactors=F,header=T)
 colnames(symbol)[1]<-"Name"
-merge(all_gene,symbol,by="Name")->all_gene
+
+if (!("SYMBOL" %in% colnames(all_gene))) {
+	merge(all_gene,symbol,by="Name")->all_gene
 
 
-write.table(all_gene, input, sep="\t", quote=F, row.names=F)
+	write.table(all_gene, input, sep="\t", quote=F, row.names=F)
+}
 gene     <- read.table(input, stringsAsFactors=F,header=T)$SYMBOL
 eg <- bitr(gene, fromType="SYMBOL", toType="ENTREZID", OrgDb=db[[organ]])
 
