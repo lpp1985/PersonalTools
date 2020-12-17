@@ -23,7 +23,7 @@ Options:
 library(STRINGdb)
 
 inputfile  = normalizePath(ARGS[1])
-organ      = ARGS[2]
+species_id = ARGS[2]
 outputpath = normalizePath(ARGS[3])
 
 data = read.table(inputfile, header = T, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
@@ -37,7 +37,7 @@ cat("##### get species id #####\n")
 #name2id    =  STRINGdb$new(version = "10", species_name = NULL)
 #organ      = gsub("_", " ", organ)
 #species_id = name2id$species_id[name2id$official_name == organ]
-species_id = 10090
+#species_id = 10090
 #加载数据库，将gene名和数据库中的蛋白标识符mapping
 cat("##### map gene symbol #####\n")
 
