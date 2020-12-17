@@ -41,10 +41,10 @@ my @html_urls = prase_txt($input);
 
 download();
 
-system qq{cat $out_dir/html/*html | grep "tmp/mark_pathway" | sed 's/<img src="//' |   sed 's/" name="pathwayimage" name="pathwayimage" usemap="#mapdata" border="0" \\/>//' |   awk '{print "http://www.genome.jp"\$0}' > $out_dir/png.urls.txt};
+system qq{cat $out_dir/html/*html | grep "tmp/mark_pathway" |grep "img src=" |sed -r 's/\\s+<img src="//g' |   sed -r 's/\".+//g' |   awk '{print "http://www.genome.jp"\$0}' > $out_dir/png.urls.txt};
 
 my @png_urls = prase_png_txt(qq{$out_dir/png.urls.txt});
-
+#print @png_urls;
 download_pathway();
 
 
@@ -159,7 +159,9 @@ sub download_png
 	foreach my $x (@{$urls}) {
 		my $pid = $pm->start and next;
 		my ($name) = $x =~ /(\w+)\.png/;
+		print $x;
 		system qq{wget  -q -O $out_dir/png/$name.png "$x"};
+		print  "  $x";
 		$pm->finish;
 	}
 	$pm->wait_all_children;

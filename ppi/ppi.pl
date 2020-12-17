@@ -48,7 +48,7 @@ GetOptions(
 );
 die help() if(defined $if_help or (not defined $gene_list or not defined $output_dir));
 $species = "Homo_sapiens" if(not defined $species);
-$taxon = "9606";
+$taxon = "9606" if(not defined $taxon);
 $output_dir = Cwd::abs_path($output_dir);
 ###################################################################### 主程序
 

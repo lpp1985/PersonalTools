@@ -23,7 +23,7 @@ Options:
 library(STRINGdb)
 
 inputfile  = normalizePath(ARGS[1])
-species_id = ARGS[2]
+species_id = as.integer( ARGS[2] )
 outputpath = normalizePath(ARGS[3])
 
 data = read.table(inputfile, header = T, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
