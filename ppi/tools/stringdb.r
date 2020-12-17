@@ -27,8 +27,10 @@ organ      = ARGS[2]
 outputpath = normalizePath(ARGS[3])
 
 data = read.table(inputfile, header = T, sep = "\t", check.names = F, comment.char = "", quote = "", fill = T)
+data$Color="#FF0000FF"
+data$Color[data$log2FoldChange >= 0 ]   <- "red"
 if  ( dim(data)[1]>2000 ) data  <- data[1:2000,]
-colnames(data)[1] = c("gene")
+colnames(data)[1] = c("#00FF00FF")
 
 #获取数据库中物种的species_id
 cat("##### get species id #####\n")
@@ -38,7 +40,9 @@ cat("##### get species id #####\n")
 species_id = 10090
 #加载数据库，将gene名和数据库中的蛋白标识符mapping
 cat("##### map gene symbol #####\n")
-string_db   = STRINGdb$new(version = "11", species = species_id, score_threshold = 0, input_directory = "")
+
+CONDABASE <- Sys.getenv("CONDABASE")   
+string_db   = STRINGdb$new(version = "11", species = species_id, score_threshold = 0, input_directory =  paste(CONDABASE, "db/string/",sep = "/") )
 data_mapped = string_db$map(data, "gene", removeUnmappedRows = TRUE)
 hits        = data_mapped$STRING_id
 
@@ -48,7 +52,7 @@ cat("##### ppi start #####\n")
 pdf(paste(outputpath, "ppi_string.pdf",sep = "/"))
 
 differentgene <- string_db$add_diff_exp_color( subset(data_mapped, padj<0.05),logFcColStr="log2FoldChange" )
-payload_id <- string_db$post_payload( differentgene$STRING_id,colors=differentgene$Status )
+payload_id <- string_db$post_payload( differentgene$STRING_id,colors=differentgene$Color )
 
 
 string_db$plot_network( hits , payload_id=payload_id ) # ppi分析，绘图，该步骤会从官网下载数据库，大约35MB
