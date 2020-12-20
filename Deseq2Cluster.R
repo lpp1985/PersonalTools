@@ -1,6 +1,6 @@
 #!/usr/bin/env  Rscript
 library(docopt)
-"Usage: deseq2.r  -i <file> -o <dir> -s <file> [--Rlib <dir>]
+"Usage: Deseq2Cluster.R  -i <file> -o <dir> -s <file> [--Rlib <dir>]
 Options:
     -i, --input <file>              输入文件，样本reads count原始表达矩阵。 第一列是基因、转录本的ID，后面的所有列可以是样本，也可以是注释。 样本的表达量不能有缺失，缺失应该设为0。矩阵分隔符是'\\t'
     -o, --output <dir>              结果输出目录
@@ -94,5 +94,11 @@ pheatmap(sampleDistMatrix,
 pdf(file=paste0(output_dir, "/PCA.pdf"))
 plotPCA(rld, intgroup=c("Condition"))
 dev.off()
-
-
+README<- file(paste0(output_dir, "/README.txt"))
+write("
+├── clustering_sample.pdf	样本Hieracical  聚类图
+├── Correlate.pdf		样本所有RNA表达模式Pearson相关系数矩阵图
+├── EachSampleFPKM.tsv		每一个组的绝对表达量
+└── PCA.pdf			样本的PCA聚类分析
+",README)
+close( README )

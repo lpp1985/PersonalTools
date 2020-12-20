@@ -23,7 +23,7 @@ my $readme_kegg              = "$tools_dir/readme_kegg.txt";
 my $readme_go                = "$tools_dir/readme_go.txt";
 
 # 软件、环境设置
-my $Rscript         = "Rscript";
+my $Rscript         = "Rscript --quiet";
 #my $Rlib            = "/home/genesky/software/r/3.5.1/lib64/R/library";
 #$ENV{"R_LIBS"} = $Rlib; # R包路径
 # 本流程需要的R包汇总
@@ -47,7 +47,7 @@ GetOptions(
     "help|h"          => \$if_help,
 );
 die help() if(defined $if_help or (not defined $gene_list or not defined $output_dir));
-$species = "Homo_sapiens" if(not defined $species);
+$species = "hsa" if(not defined $species);
 $taxon = "9606" if(not defined $taxon);
 $output_dir = Cwd::abs_path($output_dir);
 ###################################################################### 主程序
@@ -64,7 +64,7 @@ print "##### start enrichment analysis #####\n";
 
 # （3.1）富集分析物种ID检测
 my %hashPahtwayDB = get_enrichment_db(); # 富集分析物种数据库
-my $OrgDb_name    = $hashPahtwayDB{$species}{"OrgDb"};
+my $OrgDb_name    = $species;
 if(not defined $OrgDb_name)
 {
     print "[warnings] do not support [$species] to do enrichment analysis\n";
@@ -161,11 +161,11 @@ sub get_enrichment_db{
     my %hashPahtwayDB;
     
 
-    $hashPahtwayDB{"Homo_sapiens"}{'OrgDb'}                    = "hsa";
+    $hashPahtwayDB{"hsa"}{'OrgDb'}                    = "hsa";
     
-    $hashPahtwayDB{"Mus_musculus"}{'OrgDb'}                    = "mmu";
+    $hashPahtwayDB{"mmu"}{'OrgDb'}                    = "mmu";
    
-    $hashPahtwayDB{"Rattus_norvegicus"}{'OrgDb'}               = "rno";
+    $hashPahtwayDB{"rno"}{'OrgDb'}               = "rno";
  
 
     return %hashPahtwayDB;
@@ -183,7 +183,7 @@ Options:
 
          --gene_list/-g    [必填] gene_list文件，第一列数据是基因名，不能有表头。第二列允许字符up/down(不区分大小写)，用于在通路图中标记颜色默认为红色（up=red,down=blue）
 	 --taxon/-t	   [必填] taxonomy ID
-         --species/-s      物种名称，默认为人。人=Homo_sapiens，小鼠=Mus_musculus，大鼠=Rattus_norvegicus，拟南芥=Arabidopsis_thaliana，杨树=Populus_trichocarpa，
+         --species/-s      物种名称，默认为人。人=hsa，小鼠=mmu，大鼠=rno
          --output_dir/-o   [必填] 结果输出路径
          --enrichment/-e   是否对基因簇做富集分析，默认不做。支持物种人，小鼠，大鼠
          --keep_tmp/-k     是否保留临时文件目录，默认删除。临时目录：tmp_delete

@@ -124,8 +124,8 @@ cnt_norm <- as.data.frame(counts(dds, normalized=TRUE))
 cnt_norm = data.frame(ID=rownames(cnt_norm), cnt_norm, stringsAsFactors=F, check.names = F)
 
 # norm 结果输出
-norm_file <- paste0(output_dir, "/NormailizedExpression.tsv")
-write.table(cnt_norm, norm_file, sep="\t", quote=F, col.names = T, row.names = F)
+#norm_file <- paste0(output_dir, "/NormailizedExpression.tsv")#
+#write.table(cnt_norm, norm_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 # 差异分析结果提取
 # (1) 补充case/control表达量均值
@@ -154,13 +154,13 @@ all_file <-paste0(output_dir, "/AllDifferentialGene.tsv")
 write.table(resSig, all_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 
-Up_file <-paste0(output_dir, "/Up.tsv")
+Up_file <-paste0(output_dir, "/",case_group_name,"_Up.tsv")
 resSigUp<-subset(resSig, log2FoldChange>0)
 write.table(resSigUp, Up_file, sep="\t", quote=F, col.names = T, row.names = F)
 
 
 
-Down_file<-paste0(output_dir, "/Down.tsv")
+Down_file<-paste0(output_dir,"/",case_group_name, "_Down.tsv")
 resSigDown <- subset(resSig, log2FoldChange<0)
 write.table(resSigDown, Down_file, sep="\t", quote=F, col.names = T, row.names = F)
 
@@ -360,3 +360,52 @@ p = ggplot(data=sites, aes(x = PC1, y = PC2, colour = Group, shape = Group)) +
         ggtitle("PCA plot of all RNA") + xlab(paste("PC1 ", "(", pc1_proportion, "%)", sep="")) + ylab(paste("PC2 ", "(", pc2_proportion, "%)", sep="")) + theme(plot.title = element_text(hjust = 0.5))
 p
 dev.off()
+
+README<- file( paste0(output_dir, "/Readme.txt"),'w'  )
+write( ".
+├── AllDifferentialGene.tsv				所有差异表达基因的列表
+├── AllDifferentialGene.tsv.status		所有差异表达的状态，上调或者下调
+├── all_result.txt						所有基因的差异表达结果 包含上调，下调，不变
+├── Ck_Down.tsv							下调基因的列表			
+├── Ck_Up.tsv							上调的基因列表
+├── correlation.pdf						所有样本的相关性矩阵
+├── diff_cluster.pdf					所有基因的Hierachical 聚类分析热图
+└── valcano.pdf							差异表达基因火山图
+├── Enrichment							差异表达基因的富集结果文件夹
+│   ├── AllDifferentialGene				所有基因的富集分析结果
+│   │   ├── GO_barplot.pdf				Gene Ontology的条状图
+│   │   ├── go.bp.pdf					Gene Ontology Biological Process的有向无环图
+│   │   ├── go.cc.pdf					Gene Ontology Cellular Component的有向无环图
+│   │   ├── go_enrichment.xls			Go的富集分析结果
+│   │   ├── go.mf.pdf					Gene Ontology molecular function的有向无环图
+│   │   ├── kegg_dotplot.pdf			KEGG通路富集散点图
+│   │   └── kegg_enrichment.xls			KEGG富集分析结果
+│   ├── *_Down/							下调基因的富集分析结果
+│   │   
+│   └── *_Up/							上调基因的富集分析结果
+│       
+├── heatmap.pdf							差异表达基因聚类分析的热图
+├── heatmap_top50.pdf					p值最小的Top50差异表达基因聚类分析的热图
+├── ma.pdf								差异表达基因的鱼骨图（Ma plot）
+├── pca.all_rna.pdf						所有基因的PCA分析图
+├── pca.diff_rna.pdf					所有差异表达基因的PCA分析图
+├── PPI									差异表达基因蛋白质互作网络分析结果（基于String Database[ search tool for the retrival of interacting genes/proteins]）v 11.0进行分析的结果（https://string-db.org/）
+│   ├── cluster_1						基于CNM算法（改进Newman贪婪算法）对蛋白质互作网络进行Cluster聚类分析，将高相关的蛋白质互作体系进行预测
+│   │   ├── Custom_Figures				每个Cluster内的聚类分析
+│   │   │   ├── GO_barplot.pdf
+│   │   │   ├── go.bp.pdf
+│   │   │   ├── go.cc.pdf
+│   │   │   ├── go.mf.pdf
+│   │   │   ├── kegg_dotplot.pdf
+│   │   │   └── kegg_heatmap.pdf
+│   │   └── KEGG_Pathway_Illustrations	相关蛋白质的KEGG通路图
+│   ├── cluster.xls						cluster聚类结果
+│   ├── GO_Enrichment_Summary.xlsx		每个Cluster的Gene Ontology富集分析结果
+│   ├── interactions.xls				蛋白自互作网络结果列表
+│   ├── KEGG_Enrichment_Summary.xlsx	KEGG通路富集分析结果
+│   ├── ppi.pdf							差异表达基因蛋白质互作网络Cluster分析结果图
+│   └── ppi_string.pdf					差异表达基因蛋白质互作网络图
+",README )
+
+
+
