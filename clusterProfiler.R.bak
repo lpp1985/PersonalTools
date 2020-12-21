@@ -1,6 +1,6 @@
 #!/usr/bin/env Rscript 
 library(docopt)
-library(plyr)
+
 "Usage: clusterProfiler.R  [options]  INPUT OUTPUTDIR
 Options:
    -s --srgan=srgan    the organism, the value in <hsa, mmu, rno> [default: hsa]
@@ -38,24 +38,13 @@ eg <- bitr(gene, fromType="ENSEMBL", toType="ENTREZID", OrgDb=db[[organ]])
 symbol <- bitr(gene, fromType="ENSEMBL", toType="SYMBOL", OrgDb=db[[organ]])
 all_gene <- read.delim(input, stringsAsFactors=F,header=T)
 colnames(symbol)[1]<-"Name"
-colnames(eg)[1] <- "Name"
 
 if (!("SYMBOL" %in% colnames(all_gene))) {
 	merge(all_gene,symbol,by="Name")->all_gene
 
 
-	
+	write.table(all_gene, input, sep="\t", quote=F, row.names=F)
 }
-
-if (!("ENTREZID" %in% colnames(all_gene))) {
-	merge(all_gene,eg,by="Name")->all_gene
-
-
-	
-}
-
-write.table(all_gene, input, sep="\t", quote=F, row.names=F)
-
 gene     <- read.delim(input, stringsAsFactors=F,header=T)$SYMBOL
 
 if (  ( "Status"   %in% colnames(all_gene) )  ){
@@ -218,35 +207,6 @@ kk_enrich <- as.data.frame(kk)
 kk_enrich$geneID <- unlist(lapply(1:length(kk_enrich$geneID), function(t){  paste(eg[[1]][eg[[2]] %in% unlist(strsplit(kk_enrich$geneID[t], "/"))], collapse = "/")  }))
 
 kegg_pdf <- paste(prefix, "kegg_dotplot.pdf", sep="/")
-if(nrow(kk_enrich) >= 1){
-	pdf(kegg_pdf,height=7,width=12)
-	p <-dotplot(kk)
-	print(p)
-	dev.off()
-	write.table(kk_enrich, kegg_enrichment, sep="\t", quote=F, row.names=F)
-}
-
-all_data <- read.delim(input, stringsAsFactors=F,header=T)
-geneList <- unique(all_data[,c("ENTREZID","log2FoldChange")] )
-glist <- geneList[,2]
-names(glist) <- as.character(geneList[,1])
-
-glist <- sort(glist,decreasing = T)
-
- 
-kk <- gseKEGG(gene         =glist  ,
-				organism = organ,	
-				pvalueCutoff =1,
-				pAdjustMethod     = "BH",
-				)
-
-kk_enrich <- as.data.frame(kk)
-rename(kk_enrich,c("core_enrichment"="geneID") )
-# kk_enrich$core_enrichment->kk_enrich$geneID
-kk_enrich$geneID <- unlist(lapply(1:length(kk_enrich$geneID), function(t){  paste(eg[[1]][eg[[2]] %in% unlist(strsplit(kk_enrich$geneID[t], "/"))], collapse = "/")  }))
-kegg_pdf <- paste(prefix, "kegg_gsea_dotplot.pdf", sep="/")
-kegg_enrichment <- paste(prefix, "kegg_gsea_enrichment.xls", sep="/")
-
 if(nrow(kk_enrich) >= 1){
 	pdf(kegg_pdf,height=7,width=12)
 	p <-dotplot(kk)

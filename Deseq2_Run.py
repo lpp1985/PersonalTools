@@ -37,12 +37,19 @@ if __name__ == '__main__':
 
     parser.add_option("-o", "--Output", action="store",
                       dest="Output",
-                      help="Output Path")    
+
+                      help="Output Path")
+
+    parser.add_option("-x", "--XLS", action="store",
+                      dest="XLS",
+                      default="",
+                      help="xls Annotation file")
     (options, args) = parser.parse_args()
     reads_file = options.INPUT
     sample_file = options.Sample
     threshold = options.Threshold
     output_path = options.Output
+    xls = options.XLS
     RUN_FILE = open(  options.Run,'rU' )
     sample_table = pd.read_table( sample_file )
     group_sample = Ddict()
@@ -57,7 +64,8 @@ if __name__ == '__main__':
         control_group = l_l[ 0 ]
         case_sample_list =  ",".join(  group_sample[  case_group ]    )
         control_sample_list = ",".join(  group_sample[  control_group ]    )
-        os.system(  """deseq2.r  -i {count}  -o {output_path}/Differential/{control_group}__{case_group} --case_group_name {case_group} --control_group_name {control_group}  --case_sample_list {case_sample_list} --control_sample_list {control_sample_list}  --log2fc_cutoff {threshold} """.format( count =reads_file,  output_path = output_path,control_group = control_group, case_group = case_group, case_sample_list= case_sample_list,control_sample_list = control_sample_list,threshold = threshold  )  )
+        print(  """deseq2.r  -i {count}  -o {output_path}/Differential/{control_group}__{case_group} --case_group_name {case_group} --control_group_name {control_group}  --case_sample_list {case_sample_list} --control_sample_list {control_sample_list}  --log2fc_cutoff {threshold} -x {xls} """.format(xls=xls, count =reads_file,  output_path = output_path,control_group = control_group, case_group = case_group, case_sample_list= case_sample_list,control_sample_list = control_sample_list,threshold = threshold  )  )
+        os.system(  """deseq2.r  -i {count}  -o {output_path}/Differential/{control_group}__{case_group} --case_group_name {case_group} --control_group_name {control_group}  --case_sample_list {case_sample_list} --control_sample_list {control_sample_list}  --log2fc_cutoff {threshold} -x {xls} """.format(xls=xls, count =reads_file,  output_path = output_path,control_group = control_group, case_group = case_group, case_sample_list= case_sample_list,control_sample_list = control_sample_list,threshold = threshold  )  )
         
         
     os.system(

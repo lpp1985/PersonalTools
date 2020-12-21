@@ -1,6 +1,6 @@
 #!/usr/bin/env  Rscript
 library(docopt)
-"Usage: deseq2.r  -i <file> -o <dir> --case_group_name <string> --control_group_name <string> --case_sample_list <string> --control_sample_list <string> [--cor_file <file> --anno_col <string> --pvalue_cutoff <numeric> --log2fc_cutoff <numeric> --Rlib <dir> --xls <file>]
+"Usage: deseq2.r  -i <file> -o <dir> --case_group_name <string> --control_group_name <string> --case_sample_list <string> --control_sample_list <string> [--cor_file <file> --anno_col <string> --pvalue_cutoff <numeric> --log2fc_cutoff <numeric> --Rlib <dir>]
 Options:
     -i, --input <file>              输入文件，样本reads count原始表达矩阵。 第一列是基因、转录本的ID，后面的所有列可以是样本，也可以是注释。 样本的表达量不能有缺失，缺失应该设为0。矩阵分隔符是'\\t'
     -o, --output <dir>              结果输出目录
@@ -12,7 +12,6 @@ Options:
     --log2fc_cutoff <numeric>       标记显著性符号时，log2 foldchange阈值, 绝对值 [default: 0]
     --anno_col <string>             input列名。从input文件中挑选指定列，放到差异结果尾部。多个列用逗号分隔。
     --cor_file <file>               协变量矫正。至少包含两列，有表头，不能有缺失值。第一列样本名，第二列及之后的列：要矫正的变量，可以是字符型、离散型数值、连续型数值。样本顺序没有限制。
-    -x, --xls <file>                         注释得到的xls文件
     --Rlib <dir>                    R包路径  [default: /home/genesky/software/r/3.5.1/lib64/R/library] " -> doc
 
 opts                     <- docopt(doc, version = '对两组样本的表达量做差异分析 \n          李澎鹏\n')
@@ -27,7 +26,6 @@ log2fc_cutoff            <- as.numeric(opts$log2fc_cutoff)
 anno_col                 <- opts$anno_col
 cor_file                 <- opts$cor_file
 Rlib                     <- opts$Rlib
-xls                      <- opts$xls
 .libPaths(Rlib)
 
 # 部分信息提前准备
@@ -142,12 +140,6 @@ res$Status[res$padj < pvalue_cutoff & res$log2FoldChange <= -(log2fc_cutoff)] <-
 res$Status <- factor(res$Status, levels = c("Up", "Down", "Not DEG"))
 res = cbind(cnt_norm[rownames(res), ], res)
 colnames(res)[1] = 'Name'  
-#head(res)
-if (! is.null(xls)){
-	all_xls = read.delim(xls, header=T, sep="\t", check.names=F)
-	head(all_xls)
-	res<- merge(res,all_xls,by="Name",all.x=TRUE)
-}
 # 补充注释信息
 if(length(anno_columns) > 0) res = cbind(res, data_input[res$ID, anno_columns, drop=FALSE] )
 
