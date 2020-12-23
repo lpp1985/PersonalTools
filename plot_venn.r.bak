@@ -16,7 +16,6 @@ Rlib                   <- opts$Rlib
 
 # 加载
 library(VennDiagram)
-library( nVennR  )
 
 
 # 读取数据
@@ -141,24 +140,21 @@ if(class_count == 1)
   )
 } else
 { # 绘制n维韦恩图
-  # venn.plot <- venn.diagram(
-    # x = data_plot,
-    # filename = paste0(output_prefix, '.png'), imagetype = "png",
-    #col = "black", #边框颜色
-    # lwd = 3, #边框线宽度
-    # fill = mycol[1:length(data_plot)], #填充色
-    # alpha = 0.6, #透明度
-    # cex = 1.5, # 标签字体大小
-    # fontfamily = "serif",
-    #fontface = "bold", #标签字体
-    # cat.col = mycol[1:length(data_plot)],# 类名颜色
-    # cat.cex = 1.7, # 类名字体大小
-    # cat.fontfamily = "serif",
-    #cat.fontface = "bold", # 类名字体
-    # margin = 0.05, # 边际距离
-  # ) 
-  
- #               outFile='./output/imgs20/venn_false.svg'
-  myV <- plotVenn(data_plot,nCycles = 20000, opacity=0.2, borderWidth=2, labelRegions = F, fontScale = 3,outFile =  paste0(output_prefix, '.svg'))
+  venn.plot <- venn.diagram(
+    x = data_plot,
+    filename = paste0(output_prefix, '.png'), imagetype = "png",
+    # col = "black", #边框颜色
+    lwd = 3, #边框线宽度
+    fill = mycol[1:length(data_plot)], #填充色
+    alpha = 0.6, #透明度
+    cex = 1.5, # 标签字体大小
+    fontfamily = "serif",
+    # fontface = "bold", #标签字体
+    cat.col = mycol[1:length(data_plot)],# 类名颜色
+    cat.cex = 1.7, # 类名字体大小
+    cat.fontfamily = "serif",
+    # cat.fontface = "bold", # 类名字体
+    margin = 0.05, # 边际距离
+  ) 
 }
 

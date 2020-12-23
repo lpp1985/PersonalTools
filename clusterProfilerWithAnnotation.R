@@ -20,6 +20,7 @@ dir.create(prefix, showWarnings = FALSE,recursive = TRUE)
 library(clusterProfiler)
 library(topGO)
 library(rlist)
+library(tidyr)
 db       <- list(
 'hsa' = "org.Hs.eg.db",
 'mmu' = 'org.Mm.eg.db',
@@ -30,9 +31,8 @@ db       <- list(
 
 gene     <- read.delim(input, stringsAsFactors=F,header=T)$Name
 
-#all_data <- read.table(input, stringsAsFactors=F,header=T)
-#all_data <- all_data[,c("SYMBOL","Status")]
-#write.table( all_data, paste0(input,".status" ),  sep="\t", quote=F, row.names=F)
+all_data <- read.delim(input, stringsAsFactors=F,header=T)
+
 
 eg <- bitr(gene, fromType="ENSEMBL", toType="ENTREZID", OrgDb=db[[organ]])
 symbol <- bitr(gene, fromType="ENSEMBL", toType="SYMBOL", OrgDb=db[[organ]])
@@ -70,8 +70,8 @@ ego_cc <- enrichGO(gene          = gene,
                    OrgDb=db[[organ]],
                    ont           = "CC",
                    pAdjustMethod = "BH",
-                   pvalueCutoff  = 1,
-                   qvalueCutoff  = 1,
+                   pvalueCutoff  = 0.05,
+                   qvalueCutoff  = 0.05,
                    readable      = TRUE)
 
 
@@ -80,8 +80,8 @@ ego_bp <- enrichGO(gene          = gene,
                    OrgDb=db[[organ]],
                    ont           = "BP",
                    pAdjustMethod = "BH",
-                   pvalueCutoff  = 1,
-                   qvalueCutoff  = 1,
+                   pvalueCutoff  = 0.05,
+                   qvalueCutoff  = 0.05,
                    readable      = TRUE)
 
 
@@ -89,8 +89,8 @@ ego_mf <- enrichGO(gene          = gene,
                    OrgDb=db[[organ]],
                    ont           = "MF",
                    pAdjustMethod = "BH",
-                   pvalueCutoff  = 1,
-                   qvalueCutoff  = 1,
+                   pvalueCutoff  = 0.05,
+                   qvalueCutoff  = 0.05,
                    readable      = TRUE)
 
 cc <- as.data.frame(ego_cc)
@@ -103,7 +103,12 @@ mf <- as.data.frame(ego_mf)
 if(nrow(mf) >= 1) mf$Type <- "MF"
 
 dir.create(prefix, showWarnings = FALSE)
+
 go_enrichment   <- paste(prefix, "go_enrichment.xls", sep="/")
+go_enrichmentanno   <- paste(prefix, "go_enrichmentWithAnnotation.xls", sep="/")
+
+
+
 kegg_enrichment <- paste(prefix, "kegg_enrichment.xls", sep="/")
 
 
@@ -129,8 +134,24 @@ dev.off()
 
 res <- rbind(bp, cc, mf)
 
-if(nrow(res) >= 1) write.table(res, go_enrichment, sep="\t", quote=F, row.names=F)
+res_raw <- res
+res_raw$geneID <- unlist(lapply(1:length(res_raw$geneID), function(t){  paste(eg[[2]][eg[[1]] %in% unlist(strsplit(res_raw$geneID[t], "/"))], collapse = "/")  }))
+res_raw<-as.data.frame(res_raw)
+rename( res_raw,c("geneID"="ENTREZID")    ) -> res_raw
+rename( res_raw,c("pvalue"="EnrichedPvalue")    ) -> res_raw
 
+res_raw %>% separate_rows(ENTREZID, sep = "/") ->longtext
+all_data <- read.delim(input, stringsAsFactors=F,header=T)
+merge(  longtext,all_data,by="ENTREZID") ->output_long
+
+if(nrow(res) >= 1){
+	
+	write.table(res, go_enrichment, sep="\t", quote=F, row.names=F)
+
+	write.table(output_long, go_enrichmentanno, sep="\t", quote=F, row.names=F)
+
+
+}
 ego <- res
 types       <- unique(ego$Type)
 DataForPlot <- list()
@@ -153,8 +174,8 @@ for(j in 1:length(types)){
 GO <- list.rbind(DataForPlot)     # rbind all elements in a list by row
 str(GO)
 
-#color  <- colorRampPalette(c("light blue","pink","light green"))(length(unique(GO$Type)))
-#color1 <- rep(color,as.numeric(table(GO$Type)))
+color  <- colorRampPalette(c("light blue","pink","light green"))(length(unique(GO$Type)))
+color1 <- rep(color,as.numeric(table(GO$Type)))
 
 #########plot go_barplot#####################
 go_bar <- paste(prefix, "GO_barplot.pdf", sep="/")
@@ -197,25 +218,41 @@ for(i in 1:length(GO$Description)){
 }
 dev.off()
 
-# pdf(go_bar, width=15, height=8)
-# par(mar = c(3,max(nchar(GO$Description)) * 0.37, 1, 2)) 
-# gobar <- barplot(GO$Count, plot=T, names.arg=GO$Description, 
-# 		cex.lab=1, las=1, ps=0.5, 
-# 		xlim=c(0,max(GO$Count)*1.25), 
-# 		cex.names=0.8, axis.lty=1, 
-# 		xlab="Gene Number",axes=TRUE,col=color1,horiz=T,
-# 		mgp=c(1.95,0.55,0))
-# text(cex = 0.8, y = gobar, x = GO$Count+max(GO$Count)/35, lab=c(GO$Count))
-# legend("topright", legend=unique(GO$Type),bty="n",fill=color)
-# dev.off()
+# # pdf(go_bar, width=15, height=8)
+# # par(mar = c(3,max(nchar(GO$Description)) * 0.37, 1, 2)) 
+# # gobar <- barplot(GO$Count, plot=T, names.arg=GO$Description, 
+# # 		cex.lab=1, las=1, ps=0.5, 
+# # 		xlim=c(0,max(GO$Count)*1.25), 
+# # 		cex.names=0.8, axis.lty=1, 
+# # 		xlab="Gene Number",axes=TRUE,col=color1,horiz=T,
+# # 		mgp=c(1.95,0.55,0))
+# # text(cex = 0.8, y = gobar, x = GO$Count+max(GO$Count)/35, lab=c(GO$Count))
+# # legend("topright", legend=unique(GO$Type),bty="n",fill=color)
+# # dev.off()
 
 #########plot kegg#####################
+all_data <- read.delim(input, stringsAsFactors=F,header=T)
 kk <- enrichKEGG(gene         = gene,
                  organism = organ,
-                 pvalueCutoff = 1,
-		 qvalueCutoff = 1)
+                 pvalueCutoff = 0.05,
+		 qvalueCutoff = 0.05)
 kk_enrich <- as.data.frame(kk)
 kk_enrich$geneID <- unlist(lapply(1:length(kk_enrich$geneID), function(t){  paste(eg[[1]][eg[[2]] %in% unlist(strsplit(kk_enrich$geneID[t], "/"))], collapse = "/")  }))
+
+kk_enrich_raw <- as.data.frame(kk)
+rename(kk_enrich_raw,c("geneID"="ENTREZID") )->kk_enrich_raw
+
+
+rename (kk_enrich,c("ID"="PathwayID")   )-> kk_enrich
+rename (kk_enrich_raw,c("ID"="PathwayID")   )-> kk_enrich_raw
+
+
+
+
+kk_enrich_raw <- rename(   kk_enrich_raw,c("pvalue"="EnrichedPvalue") )
+kk_enrich_raw %>% separate_rows(ENTREZID, sep = "/") ->longtext
+
+kegg_enrichmenglong <- paste(prefix, "kegg_enrichmentWithAnnotation.xls", sep="/")
 
 kegg_pdf <- paste(prefix, "kegg_dotplot.pdf", sep="/")
 if(nrow(kk_enrich) >= 1){
@@ -223,10 +260,14 @@ if(nrow(kk_enrich) >= 1){
 	p <-dotplot(kk)
 	print(p)
 	dev.off()
+	merge(  longtext,all_data,by="ENTREZID") ->output_long
+	output_long<- output_long[order(output_long$PathwayID),]
+	write.table(output_long, kegg_enrichmenglong, sep="\t", quote=F, row.names=F)
 	write.table(kk_enrich, kegg_enrichment, sep="\t", quote=F, row.names=F)
 }
 
-all_data <- read.delim(input, stringsAsFactors=F,header=T)
+
+###############gsea analysis############
 geneList <- unique(all_data[,c("ENTREZID","log2FoldChange")] )
 glist <- geneList[,2]
 names(glist) <- as.character(geneList[,1])
@@ -236,23 +277,39 @@ glist <- sort(glist,decreasing = T)
  
 kk <- gseKEGG(gene         =glist  ,
 				organism = organ,	
-				pvalueCutoff =1,
+				pvalueCutoff =0.05,
 				pAdjustMethod     = "BH",
 				)
 
 kk_enrich <- as.data.frame(kk)
-rename(kk_enrich,c("core_enrichment"="geneID") )
-# kk_enrich$core_enrichment->kk_enrich$geneID
+kk_enrich_raw <- as.data.frame(kk)
+rename(kk_enrich,c("core_enrichment"="geneID") ) -> kk_enrich
+rename (kk_enrich,c("ID"="PathwayID")   )-> kk_enrich
+
+rename(kk_enrich_raw,c("core_enrichment"="ENTREZID") )->kk_enrich_raw
+rename(kk_enrich_raw,c("ID"="PathwayID")   )-> kk_enrich_raw
+kk_enrich_raw <- rename(   kk_enrich_raw,c("pvalue"="EnrichedPvalue") )
+
+
 kk_enrich$geneID <- unlist(lapply(1:length(kk_enrich$geneID), function(t){  paste(eg[[1]][eg[[2]] %in% unlist(strsplit(kk_enrich$geneID[t], "/"))], collapse = "/")  }))
 kegg_pdf <- paste(prefix, "kegg_gsea_dotplot.pdf", sep="/")
 kegg_enrichment <- paste(prefix, "kegg_gsea_enrichment.xls", sep="/")
+kegg_enrichmenglong <- paste(prefix, "kegg_gsea_enrichmentWithAnnotation.xls", sep="/")
+
+
 
 if(nrow(kk_enrich) >= 1){
 	pdf(kegg_pdf,height=7,width=12)
 	p <-dotplot(kk)
 	print(p)
 	dev.off()
+	
 	write.table(kk_enrich, kegg_enrichment, sep="\t", quote=F, row.names=F)
+	kk_enrich_raw %>% separate_rows(ENTREZID, sep = "/") ->longtext
+	merge(  longtext,all_data,by="ENTREZID") ->output_long
+	output_long<- output_long[order(output_long$PathwayID),]
+	write.table(output_long, kegg_enrichmenglong, sep="\t", quote=F, row.names=F)
+	
 }
 
 
